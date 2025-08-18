@@ -15,7 +15,7 @@ function SearchPortfolio({debouncedSearch, isMobile}) {
 
                 const doSearch = async () => {
                         try {
-                                const response = await fetch(`http://localhost:4000/api/projects/search?q=${debouncedSearch}`, {
+                                const response = await fetch(`/api/projects/search?q=${debouncedSearch}`, {
                                 method: "GET",
                                 });
                 

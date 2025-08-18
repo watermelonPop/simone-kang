@@ -65,7 +65,7 @@ function HomeScreen({accessToken, isMobile, themes, currentTheme, setCurrentThem
             useEffect(() => {
                 const handleFetchProjects = async () => {
                     try {
-                            const response = await fetch(`http://localhost:4000/api/projects`, {
+                            const response = await fetch(`/api/projects`, {
                                 method: "GET",
                             });
                 
