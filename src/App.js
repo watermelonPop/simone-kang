@@ -98,7 +98,7 @@ function App() {
   
     if (code && !hasExchangedCodeRef.current) {
       hasExchangedCodeRef.current = true; // set to true immediately
-      axios.post("http://127.0.0.1:4000/login", { code })
+      axios.post("/api/login", { code })
         .then((res) => {
           console.log("SUCCESS");
           setAccessToken(res.data.accessToken);
@@ -118,7 +118,7 @@ function App() {
     if (!refreshToken || !expiresIn) return;
     const interval = setInterval(() => {
       axios
-        .post("http://127.0.0.1:4000/refresh", {
+        .post("/api/refresh", {
           refreshToken,
         })
         .then((res) => {

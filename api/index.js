@@ -17,7 +17,6 @@ async function connectToDB() {
 
 module.exports = async (req, res) => {
   const { url, method, body } = req;
-  console.log("TOP OF EXPORTS");
 
   // 🌐 Spotify Setup
   const spotifyApi = new SpotifWebAPI({

@@ -65,7 +65,7 @@ function HomeScreen({accessToken, isMobile, themes, currentTheme, setCurrentThem
             useEffect(() => {
                 const handleFetchProjects = async () => {
                     try {
-                            const response = await fetch(`https://simone-kang.vercel.app/api/projects`, {
+                            const response = await fetch(`/api/projects`, {
                                 method: "GET",
                             });
                 
