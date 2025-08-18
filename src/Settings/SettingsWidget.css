@@ -1,0 +1,119 @@
+/*:root {
+  --backgroundColor: #FCF7EB;
+  --backgroundTxtColor: #000000;
+  --accentColor1: #FD9E9E;
+  --accentColor2: #92C786;
+  --accentTxtColor1: #000000;
+  --accentTxtColor2: #000000;
+  --fontFamily: "Rubik", sans-serif;
+  --fontWeight: 450;
+}*/
+
+
+.settingsWidgetOuter{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+}
+
+.settingsTitle{
+        height: 20%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+}
+
+.settingsContent {
+        height: 80%;
+        width: 100%;
+        overflow-y: auto;           /* allow vertical scrolling */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* stack items from top, no centering overlap */
+        align-items: center;
+      }
+
+      .themeDiv {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       width: 90%;
+       height: 70%;
+       filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+       border: 2px solid black;
+       border-radius: 17px;
+      }
+
+      .themeDiv div {
+        height: 100%;
+        flex: 1;                     /* distribute each color block evenly */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: center;
+      }
+
+
+
+.themesOuterDiv {
+        width: 60%;
+        flex: 1;                     /* take up remaining vertical space */
+        background-color: var(--accentColor1);
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;            /* scroll themes list if too many */
+        gap: 5%;                   /* space between themeDivs */
+        box-sizing: border-box;
+        padding: 5%;
+      }
+
+      .settingsBtnsDiv{
+        width: 80%;
+        height: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .outerThemeDiv{
+        background-color: transparent;
+        width: 100%;                 /* fill parent width */
+        min-height: 60px;            /* consistent height per theme */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 4px solid transparent;
+        border-radius: 15px;
+      }
+
+      .selectedThemeDiv{
+        border-color: black;
+        background-color: black;
+      }
+
+      .themesTitle{
+        font-size: 1.3rem;
+        font-weight: 500;
+      }
+
+      .settingsBtnsDiv button{
+        border: none;
+        border-radius: 15px;
+        padding: 2.5%;
+        font-family: var(--fontFamily);
+        font-size: 1rem;
+        font-weight: 500;
+        background-color: var(--accentColor2);
+        color: var(--accentTxtColor2);
+      }

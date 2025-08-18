@@ -1,0 +1,286 @@
+/*:root {
+  --backgroundColor: #FCF7EB;
+  --backgroundTxtColor: #000000;
+  --accentColor1: #FD9E9E;
+  --accentColor2: #92C786;
+  --accentTxtColor1: #000000;
+  --accentTxtColor2: #000000;
+  --fontFamily: "Rubik", sans-serif;
+  --fontWeight: 450;
+}*/
+
+.outerDayNightWidget {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        font-size: 2rem;
+        transition: background 0.5s;
+    border: 2px solid black;
+}
+
+
+.canvas {
+    width: 90%;
+    height: 80%;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    /* Remove background here! */
+}
+
+.bg-gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 1;
+    transition: opacity 10s;
+    pointer-events: none;
+    border-radius: 15px;
+}
+
+.bg-gradient.fade-out {
+    opacity: 0;
+    transition: opacity 10s;
+}
+
+
+/* Gradients for each phase */
+.bg-Morning {
+    background: linear-gradient(#FFD580, #88D0C7);
+}
+.bg-Afternoon {
+    background: linear-gradient(#88D0C7, #FFFACD);
+}
+.bg-Evening {
+    background: linear-gradient(#88D0C7,#FCA68A, #FF927E, #A8657C, #77607C);
+}
+.bg-Night {
+    background: linear-gradient(#88D0C7,#0747A3, #062A6E, #06114B, #02082E, #000000);
+}
+
+
+/* Clouds */
+.cloud, .cloud.a, .cloud.b, .cloud.c {
+    width: 40px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    top: 20px;
+    left: -20%;
+    animation-name: cloud;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    z-index: 2;
+    opacity: 0.85;
+}
+.cloud { animation-duration: 70s; }
+.cloud.a { top: 40px; animation-duration: 55s; }
+.cloud.b { top: 80px; left: -15%; animation-duration: 38s; }
+.cloud.c { top: 120px; left: -10%; animation-duration: 25s; }
+
+.cloud::before {
+    content: '';
+    width: 70px;
+    height: 30px;
+    background-color: #fff;
+    margin-left: -20px;
+    margin-top: 10px;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    left: 20px;
+    top: 5px;
+    opacity: 0.8;
+}
+.cloud::after {
+    content: '';
+    width: 70px;
+    height: 20px;
+    background-color: #fff;
+    position: absolute;
+    right: -10px;
+    top: 17px;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+@keyframes cloud {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(600px); }
+}
+
+/* Stars */
+.star, .star.a, .star.b, .star.c, .star.d {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    opacity: 0.85;
+    z-index: 3;
+    animation-name: fader;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+.star { top: 30px; left: 60px; }
+.star.a { top: 50px; left: 90%; }
+.star.b { top: 120px; left: 70%; }
+.star.c { top: 100px; left: 65%; }
+.star.d { top: 200px; left: 15%; }
+
+@keyframes fader {
+    0% { opacity: 0; }
+    15% { opacity: 0; }
+    40% { opacity: 1; }
+    60% { opacity: 0.4; }
+    70% { opacity: 1; }
+    80% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* Wind */
+.wind {
+    width: 120px;
+    background-color: #eee;
+    height: 2px;
+    position: absolute;
+    top: 60%;
+    left: -120px;
+    border-radius: 2px;
+    opacity: 0.5;
+    z-index: 4;
+    animation-name: wind;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+.wind::before {
+    content: '';
+    position: absolute;
+    left: 100px;
+    width: 80px;
+    height: 2px;
+    background-color: #eee;
+    top: 12px;
+    border-radius: 2px;
+    opacity: 0.4;
+}
+.wind::after {
+    content: '';
+    position: absolute;
+    left: 80px;
+    width: 60px;
+    height: 2px;
+    background-color: #eee;
+    top: -10px;
+    border-radius: 2px;
+    opacity: 0.3;
+}
+
+@keyframes wind {
+    0% { left: -120px; opacity: 0; }
+    10% { opacity: 1; }
+    80% { left: 100%; opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+/* Sun and Moon Orbit */
+.eclipse {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    pointer-events: none;
+    animation-name: time;
+    animation-duration: 40s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+/* Sun */
+.sun, .sun.a {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ffe066;
+    position: absolute;
+    box-shadow: 0 0 40px 10px #ffe06699;
+    opacity: 1;
+    transition: opacity 0.8s;
+}
+.sun { top: 25px; left: 25px; }
+.sun.a { bottom: 25px; right: 25px; }
+
+/* Moon */
+.moon, .moon.a {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    box-shadow: 0 0 24px 4px #fff8;
+    opacity: 1;
+    transition: opacity 0.8s;
+}
+.moon { top: 25px; right: 25px; }
+.moon.a { bottom: 25px; left: 25px; }
+
+/* Hide sun/moon when not in phase */
+.sun.hidden, .sun.a.hidden,
+.moon.hidden, .moon.a.hidden {
+    opacity: 0;
+    transition: opacity 0.8s;
+    pointer-events: none;
+}
+
+/* Utility: smoother transitions for everything */
+.sun, .sun.a, .moon, .moon.a {
+    transition: opacity 0.8s;
+}
+
+
+.daynight-greeting {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    z-index: 10;
+    text-shadow: 0 1px 6px #fff7, 0 2px 12px #0002;
+}
+
+.daynight-info{
+    position: absolute;
+    top: 90%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    z-index: 10;
+    text-shadow: 0 1px 6px #fff7, 0 2px 12px #0002;
+}
+
+
+.demoBtn{
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+}
+
+.outerDemoBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5%;
+}

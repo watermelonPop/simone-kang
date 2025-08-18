@@ -1,0 +1,75 @@
+/*:root {
+  --backgroundColor: #FCF7EB;
+  --backgroundTxtColor: #000000;
+  --accentColor1: #FD9E9E;
+  --accentColor2: #92C786;
+  --accentTxtColor1: #000000;
+  --accentTxtColor2: #000000;
+  --fontFamily: "Rubik", sans-serif;
+  --fontWeight: 450;
+}*/
+
+.linkedinWidgetOuter{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+}
+
+.linkedinTitle{
+        width: 100%;
+        height: 20%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--backgroundTxtColor);
+}
+
+.linkedinContent{
+        width: 100%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+.linkedinOuter{
+                width: 30%;
+                height: 50%;
+                background-color: var(--accentColor1);
+                color: var(--accentTxtColor1);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-radius: 15px;
+                cursor: pointer;
+}
+
+.linkedinIcon{
+        width: 100%;
+        height: 70%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 6rem;
+}
+
+.linkedinUser{
+        width: 100%;
+        height: 20%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 5%;
+}

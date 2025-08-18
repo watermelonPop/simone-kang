@@ -1,13 +1,500 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --backgroundColor: #FCF7EB;
+  --backgroundTxtColor: #000000;
+  --accentColor1: #FD9E9E;
+  --accentColor2: #92C786;
+  --accentTxtColor1: #000000;
+  --accentTxtColor2: #000000;
+  --fontFamily: "Rubik", sans-serif;
+  --fontWeight: 450;
+}
+/*
+:root {
+  --backgroundColor: #181E25;
+  --backgroundTxtColor: white;
+  --accentColor1: #203A4F;
+  --accentColor2: #4693B7;
+  --accentTxtColor1: white;
+  --accentTxtColor2: white;
+  --fontFamily: "Playfair Display", serif;
+  --fontWeight: 450;
+}*/
+
+/*:root {
+  --backgroundColor: #FFE5D9;
+  --backgroundTxtColor: #000000;
+  --accentColor1: #F4ACB7;
+  --accentColor2: #9D8189;
+  --accentTxtColor1: #000000;
+  --accentTxtColor2: #000000;
+  --fontFamily: "Sour Gummy", sans-serif;
+  --fontWeight: 450;
+}*/
+
+
+/*:root {
+  --backgroundColor: #461220;
+  --backgroundTxtColor: white;
+  --accentColor1: #FCB9B2;
+  --accentColor2: #B23A48;
+  --accentTxtColor1: #000000;
+  --accentTxtColor2: #000000;
+  --fontFamily: "Lexend", sans-serif;
+  --fontWeight: 450;
+}*/
+
+body{
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.lockScreenOuter{
+  background-color: var(--accentColor1);
+  color: var(--accentTxtColor1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 98vh;
+  margin: 0;
+  padding: 0;
+}
+
+.homeScreenOuter{
+  background-color: var(--backgroundColor);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 98vh;
+  margin: 0;
+  padding: 0;
+}
+
+.homeTopOuter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80vh;
+  margin: 0;
+  padding: 0;
+}
+
+.homeBottomOuter{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+  color: var(--accentTxtColor2);
+}
+
+.songPlaying{
+  background-color: var(--accentColor2) !important;
+}
+
+.sideBarHome{
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.appsHome{
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.appIconsRow{
+  display: flex;
+  width: 100%;
+  height: 25%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.appIcon{
+  width: 15%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.appIconImg{
+  margin: 0;
+  padding: 0;
+  margin-top: 10%;
+  background-color: var(--accentColor2);
+  color: var(--accentTxtColor2);
+  width: 90%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+.appIconTxt{
+  height: 25%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+  color: var(--backgroundTxtColor);
+}
+
+.portfolioWidgetRow{
+  width: 100%;
+  height: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lockTime{
+  font-size: 8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.lockDate{
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100%;
+  height: 15%;
+  column-gap: 5%;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+.lockBottom{
+  width: 100%;
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.lockMiddle{
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.lockTxt{
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+.lockscreen-container {
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1), opacity 0.6s;
+  will-change: transform, opacity;
+  /* Make sure it covers the screen */
+  background: white; /* or your lockscreen bg */
+  z-index: 15 !important;
+}
+
+.lockscreen-container.swipe-up {
+  transform: translateY(-100vh);
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+.homeScreenDateDiv{
+  width: 90%;
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-evenly;
+}
+
+.homeScreenDateDiv p{
+  margin-left: 6%;
+  margin-right: 6%;
+}
+
+.sideBarWidgetRow{
+  width: 90%;
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 5%;
+}
+
+.squareWidget{
+  background-color: var(--accentColor1);
+  width: 42%;
+  height: 90%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+.rectWidget{
+  background-color: var(--accentColor1);
+  width: 89%;
+  height: 90%;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+.middleWidget{
+  width: 89%;
+  height: 90%;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+  background-color: var(--accentColor2);
+}
+
+.portfolioWidget{
+  background-color: var(--accentColor1);
+  width: 93%;
+  height: 97%;
+  border-radius: 15px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+.homeScreenTime{
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  color: var(--backgroundTxtColor);
+  overflow-x: hidden;
+  max-height: 50%;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+.homeScreenDate{
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  color: var(--backgroundTxtColor);
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+  overflow-x: hidden;
+  max-height: 20%;
+}
+
+.swipeBar{
+  width: 10%;
+  height: 40px;
+  border-bottom: 3px solid var(--accentTxtColor1);
+}
+
+
+
+
+/* The widget itself */
+.sqWidget {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+.sqWidget:active {
+  box-shadow: 0 0 16px #aaa;
+}
+
+.modalBackdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  opacity: 0;
+  transition: background 0.4s, opacity 0.4s;
+}
+.modalBackdrop.visible {
+  background: rgba(0,0,0,0.35);
+  opacity: 1;
+}
+.modal {
+  background: var(--backgroundColor);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 80%;
+  border-radius: 15px;
+  position: relative;
+}
+
+.growAni {
+  animation: createBox .25s;
+}
+.shrinkAni{
+  animation: removeBox .25s;
+}
+
+
+@keyframes createBox {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes removeBox {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+
+
+.modalCloseBtn{
+  position: absolute;
+  top: 5%;
+  left: 90%;
+  z-index: 15;
+  border: none;
+  width: 5%;
+  height: 7%;
+  font-size: 3.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--backgroundTxtColor);
+}
+
+
+.homeCurrentSongTxt {
+  width: 20%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeCurrentSongTxt p {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;  /* or 2 for two lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+  /* Remove display: flex, justify-content, align-items, flex-direction */
+  /* height: 40%; <-- REMOVE this, let the content define height */
+}
+
+.homeCurrentTitle{
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.homeCurrentSubtitle{
+  font-weight:500;
+  font-size: 1rem;
+}
+
+
+.homeCurrentSongImg{
+  height: 85%;
+  width: auto;
+  border-radius: 15px;
+}
+
+
+.homeCurrentSongControls{
+  width: 60%;
+  height: 85%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+@keyframes slideDownOut {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.slideDownOut {
+  animation: slideDownOut 0.25s forwards;
+}
+
+@keyframes slideUpIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.slideUpIn {
+  animation: slideUpIn 0.25s forwards;
 }

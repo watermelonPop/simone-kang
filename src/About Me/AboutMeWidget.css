@@ -1,0 +1,124 @@
+/*:root {
+  --backgroundColor: #FCF7EB;
+  --backgroundTxtColor: #000000;
+  --accentColor1: #FD9E9E;
+  --accentColor2: #92C786;
+  --accentTxtColor1: #000000;
+  --accentTxtColor2: #000000;
+  --fontFamily: "Rubik", sans-serif;
+  --fontWeight: 450;
+}*/
+
+.aboutMeWidgetOuter{
+        width: 100%;
+        height: 100%;
+}
+
+.aboutMeTitleDiv{
+        width: 100%;
+        height: 20%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+
+.aboutMeTitle{
+        height: 100%;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--backgroundTxtColor);
+}
+
+.aboutMeTitles{
+        font-weight: 1.3rem;
+        font-weight: 600;
+        color: var(--backgroundTxtColor);
+}
+
+.aboutMeMainLayout{
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-y: scroll;
+}
+
+.simonePic {
+        float: left;                /* top right corner */
+        margin: 0 1rem 1rem 0rem;       /* space between image and text */
+        width: 22%;                  /* tweak as needed (try: 20-25%) */
+        height: auto;
+        border-radius: 8px;
+        display: block;
+}
+
+.aboutMeTopRow{
+        width: 100%;
+        height: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5%;
+}
+
+.aboutMeBottomRow {
+        width: 90%;
+        position: relative;
+      }
+      
+      .aboutMeBottomRow p {
+        background-color: var(--accentColor2);
+        color: var(--accentTxtColor2);
+        padding: 5%;
+        border-radius: 15px;
+        text-align: justify;
+        position: relative;
+        overflow: hidden;            /* ensures border/corner containment */
+      }
+
+
+
+.aboutMeEducationDiv{
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        row-gap: 5%;
+}
+
+.aboutMeAwardsDiv{
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        row-gap: 5%;
+}
+
+.sticky-flag {
+        background-color: var(--accentColor1);
+        color: var(--accentTxtColor1);
+        display: inline-block;
+        clip-path: polygon(
+          0% 0%,          /* top-left */
+          90% 0%,         /* before point starts */
+          100% 50%,       /* arrow point */
+          90% 100%,       /* after point ends */
+          0% 100%         /* bottom-left */
+        );
+        width: 80%;
+        height: 30%;
+        font-size: 1rem;
+      }
+      

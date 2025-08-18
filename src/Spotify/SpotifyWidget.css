@@ -1,0 +1,745 @@
+/*:root {
+  --backgroundColor: #FCF7EB;
+  --backgroundTxtColor: #000000;
+  --accentColor1: #FD9E9E;
+  --accentColor2: #92C786;
+  --accentTxtColor1: #000000;
+  --accentTxtColor2: #000000;
+  --fontFamily: "Rubik", sans-serif;
+  --fontWeight: 450;
+}*/
+
+.spotifyWidgetOuter{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+}
+
+.spotifyTitle{
+  width: 100%;
+  height: 20%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  column-gap: 2.5%;
+  color: var(--backgroundTxtColor);
+}
+
+.spotifyContent{
+        height: 80%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+}
+
+
+.spotifySelectDiv{
+        position: relative;
+        display: flex;
+        width: 95%;
+        height: 15%;
+        background-color: var(--accentColor2);
+        justify-content: space-evenly;
+        align-items: center; 
+        border-radius: 15px; 
+}
+
+.spotifySelectDivFree{
+  position: relative;
+  display: flex;
+  width: 95%;
+  height: 15%;
+  background-color: var(--accentColor2);
+  justify-content: space-evenly;
+  align-items: center; 
+  border-radius: 15px; 
+}
+
+
+.spotifySelectIndicator {
+        position: absolute;
+        bottom: 10px;
+        height: 6px;
+        width: 30%;
+        border-radius: 3px;
+        background: var(--accentColor1);
+        z-index: 1;
+        transition: left 0.4s cubic-bezier(.4,1.7,.7,1.01);
+        left: 0;
+      }
+      
+      .spotifySelectIndicator[data-selected="Current"] {
+        left: 2.5%;
+      }
+      .spotifySelectIndicator[data-selected="Search"] {
+        left: 35%;
+      }
+      .spotifySelectIndicator[data-selected="Playlists"] {
+        left: 67.5%;
+      }
+
+      .freeSpotifySelectIndicator {
+        position: absolute;
+        bottom: 10px;
+        height: 6px;
+        width: 40%;
+        border-radius: 3px;
+        background: var(--accentColor1);
+        z-index: 1;
+        transition: left 0.4s cubic-bezier(.4,1.7,.7,1.01);
+        left: 0;
+      }
+
+      .freeSpotifySelectIndicator[data-selected="Search"] {
+        left: 7%;
+      }
+      .freeSpotifySelectIndicator[data-selected="Playlists"] {
+        left: 53.5%;
+      }
+
+      .spotifySelectDivFree p{
+        background-color: var(--backgroundColor);
+        color: var(--backgroundTxtColor);
+        width: 40%;
+        height: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+        font-weight: 500;
+        transition: background 0.4s, color 1s;
+        column-gap: 5%;
+      }
+
+      .spotifySelectDiv p {
+        background-color: var(--backgroundColor);
+        color: var(--backgroundTxtColor);
+        width: 30%;
+        height: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+        font-weight: 500;
+        transition: background 0.4s, color 1s;
+        column-gap: 5%;
+      }
+
+      .spotifySelectDivFree p.selected {
+        background-color: var(--accentColor1);
+        color: var(--accentTxtColor1);
+        font-weight: bold;
+      }
+
+      
+      
+      .spotifySelectDiv p.selected {
+        background-color: var(--accentColor1);
+        color: var(--accentTxtColor1);
+        font-weight: bold;
+      }
+
+      .spotifySelectedOutput{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 85%;
+        justify-content: start;
+        align-items: center;
+      }
+
+      .currentSongInfo{
+        width: 100%;
+        height: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .currentSongBorder{
+        height: 80%;
+        width: 80%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: var(--accentColor1);
+        border-radius: 15px;
+        color: var(--accentTxtColor1);
+      }
+
+      .currentSongImg{
+        width: auto;
+        height: 80%;
+        border-radius: 15px;
+      }
+
+      .currentSongTxt{
+        height: 80%;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .currentSongTitle{
+        width: 100%;
+        height: fit-content;
+        margin: 0;
+        padding: 0;
+        font-size: 1.3rem;
+        font-weight: 600;
+
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;  /* or 2 for two lines */
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .currentSongArtist{
+        width: 100%;
+        height: fit-content;
+        margin: 0;
+        padding: 0;
+        font-size: 1rem;
+        font-weight: 500;
+
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;  /* or 2 for two lines */
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .currentSongControls{
+        width: 100%;
+        height: 40%;
+        background-color: var(--accentColor2);
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .volumeDiv{
+        width: 20%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accentTxtColor2);
+      }
+
+      #volume{
+        width: 70%;
+      }
+
+      .volumeDiv p{
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+      }
+
+      .controlsDiv{
+        width: 75%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .controlsDiv button{
+        background-color: transparent;
+        font-size: 1.5rem;
+        color: black;
+        border: none;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+      }
+
+      .topControls{
+        width: 100%;
+        height: 60%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      .topControls button{
+        color: var(--accentTxtColor2);
+      }
+
+      .bottControls{
+        width: 100%;
+        height: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accentTxtColor2);
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+      }
+
+      #songTime{
+        width: 80%;
+      }
+
+      .bottControls p{
+        width: 10%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+
+      input[type="range"] {
+        -webkit-appearance: none;
+        height: 5px;
+        border-radius: 5px;
+        background: var(--accentColor1);
+        outline: none;
+      }
+      
+      /* Style the slider thumb */
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: var(--accentTxtColor1);
+        cursor: pointer;
+      }
+
+      .repeat-off{
+        background-color: transparent;
+        font-size: 1.5rem;
+        color: var(--accentTxtColor2) !important;
+        border: none;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+      }
+
+      
+
+      .repeat-context, .repeat-track{
+        background-color: transparent;
+        font-size: 1.5rem;
+        color: var(--accentColor1) !important;
+        border: none;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+      }
+
+      .shuffle-true{
+        background-color: transparent;
+        font-size: 1.5rem;
+        color: var(--accentColor1) !important;
+        border: none;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+      }
+
+      .shuffle-false{
+        background-color: transparent;
+        font-size: 1.5rem;
+        color: var(--accentTxtColor2) !important;
+        border: none;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+      }
+
+      .searchDiv{
+        width: 100%;
+        height: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 5%;
+        color: var(--backgroundTxtColor);
+      }
+
+      .searchDiv p{
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .searchResultsDiv{
+        background-color: var(--accentColor1);
+        width: 95%;
+        height: 70%;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        row-gap: 5%;
+        border-radius: 15px;
+        padding-top: 5%;
+      }
+
+      .playlistSongDiv{
+        width: 80%;
+        height: 20%;
+        background-color: var(--backgroundColor);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 15px;
+        color: var(--backgroundTxtColor);
+      }
+
+      .playlistSongDiv img{
+        width: auto;
+        height: 100%;
+        border-radius: 15px;
+      }
+
+      .songDiv{
+        width: 90%;
+        height: 20%;
+        background-color: var(--backgroundColor);
+        color: var(--backgroundTxtColor);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 15px;
+      }
+
+      .songDiv img{
+        width: auto;
+        height: 100%;
+        border-radius: 15px;
+      }
+
+      .trackMainInfo {
+        width: 35%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* No text-overflow here, keep it on the p */
+      }
+      
+      .trackMainInfo p {
+        width: 90%;
+        margin: 0; /* Optional: Remove default p margin */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;   /* Limit to 2 lines */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* Remove display: flex and flex-direction */
+      }
+
+      .trackAlbumName {
+        width: 20%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* No text-overflow here, keep it on the p */
+      }
+      
+      .trackAlbumName p {
+        width: 90%;
+        /* Remove background-color if you only want it on the parent */
+        margin: 0; /* Optional: Remove default p margin */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;   /* Limit to 2 lines */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* Remove display: flex and flex-direction */
+      }
+      
+      
+
+      .trackDuration{
+        width: 15%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .trackLikeBtn{
+        width: 10%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .playlistsDiv{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 5%;
+      }
+
+      .playlistImgDiv{
+        height: 100%;
+        width: auto;       /* Set your desired square size */
+        aspect-ratio: 1 / 1; /* Ensures the container is square */
+        overflow: hidden;    /* Hide overflow */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .playlistImgDiv img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;   /* Ensures the image covers the container */
+        object-position: center; /* Center the image */
+        display: block;
+      }
+
+      .playlistName{
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .playlistTracks{
+        width: 25%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .playlistInfoDiv{
+        width: 100%;
+        height: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 5%;
+        color: var(--backgroundTxtColor);
+      }
+
+      .playlistInfoDiv p{
+        width: 70%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+
+      .playlistInfoDiv button{
+        background-color: var(--accentColor1);
+        color: var(--accentTxtColor1);
+        border-radius: 15px;
+        border: none;
+        padding: 2%;
+      }
+
+      .playlistTracksDiv{
+        background-color: var(--accentColor1);
+        width: 95%;
+        height: 70%;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        row-gap: 5%;
+        padding-top: 2.5%;
+        border-radius: 15px;
+      }
+
+      .innerPlaylistDiv{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .scrollPlaylist{
+        background-color: var(--accentColor1);
+        border-radius: 15px;
+        width: 95%;
+        height: 85%;
+        overflow-y: scroll;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-direction: column;
+        row-gap: 5%;
+        padding-top: 2.5%;
+      }
+
+
+
+
+      .spotifyWidgetSmallOuter{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: var(--accentTxtColor1);
+      }
+
+      .spotifySmallTop{
+        width: 100%;
+        height: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .spotifySmallTop p{
+        font-size: 1.5rem;
+        width: 30%;
+        height: 70%;
+        display: flex;
+        justify-content: right;
+        align-items: flex-start;
+      }
+
+      .spotifySmallTop img{
+          width: auto;
+          height: 70%;
+          border-radius: 15px;
+      }
+
+      .spotifySmallBott{
+        width: 100%;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .spotifySmallBott p{
+        margin: 0;
+        padding: 0;
+      }
+
+      .spotifySmallTitle, .spotifySmallSubtitle {
+        font-size: 1rem; /* 0.75rem for subtitle, so separate */
+        width: 85%;
+        /* Remove height, use max-height based on line-height */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1; /* Limit to 1 line */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.2rem;  /* Set appropriate line height */
+        max-height: 1.2rem;   /* limit container height to exactly one line */
+        justify-content: flex-start; /* Fix justify-content to flex-start (left aligned) */
+        align-items: center;
+        display: -webkit-box;
+      }
+
+      .spotifySmallTitle {
+        font-size: 1rem;
+        /*line-height: 1.2rem;
+        max-height: 1.2rem;*/
+        font-weight: 550;
+      }
+      
+      .spotifySmallSubtitle {
+        font-size: 0.75rem;
+        font-weight: 500;
+        /*line-height: 1rem;
+        max-height: 1rem;*/
+      }
+
+      .spotifyWidgetOff{
+        font-size: 80px;
+        color: var(--accentTxtColor1);
+        margin: 0;
+        padding: 0;
+      }
+
+      .spotifyLoginOuter{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .spotifyLoginBtn{
+        background-color: var(--accentColor1);
+        color: var(--accentTxtColor1);
+        padding: 2.5%;
+        border-radius: 15px;
+        text-decoration: none;
+      }
+
+      .trackLiked{
+        color: var(--accentColor1) !important;
+        background-color: transparent;
+        border: none;
+        font-size: 1.3rem;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+      }
+      .trackUnliked{
+        color: black;
+        opacity: 0.3;
+        background-color: transparent;
+        border: none;
+        font-size: 1.3rem;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+      }
+
+.spotSearchOuter{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.spotSearchBar{
+  width: 85%;
+  height: 50%;
+  border: 2px solid var(--backgroundTxtColor);
+  border-radius: 15px;
+  color: var(--backgroundTxtColor);
+  background-color: var(--backgroundColor);
+  font-family: var(--fontFamily);
+  font-weight: 450;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.spotSearchBtn{
+  width: 10%;
+  height: 50%;
+  border: 2px solid var(--backgroundTxtColor);
+  color: var(--backgroundTxtColor);
+  border-radius: 15px;
+  background-color: var(--backgroundColor);
+  font-weight: 600;
+}
