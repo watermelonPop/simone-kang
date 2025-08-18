@@ -25,7 +25,7 @@ function debounce(func, delay) {
   }
 
 function SpotifyFree({accessToken, search, setSearch, searchResults, selectedPlaylist, playlists, setSelectedPlaylistId, handleLikeSong, setSearchResults, handleUnlikeSong, setSelectedPlaylist}) {
-    var spotify_redirect_uri = "http://127.0.0.1:3000";
+    var spotify_redirect_uri = "https://simone-kang.vercel.app";
     //sign in for spotify premium users
     //player
     //default 1 song for those who don't sign in / don't have premium
