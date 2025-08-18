@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb');
 const SpotifWebAPI = require("spotify-web-api-node");
+console.log("TOP OF SERVER");
 
 let cachedClient = null;
 let cachedDb = null;
@@ -16,6 +17,7 @@ async function connectToDB() {
 
 module.exports = async (req, res) => {
   const { url, method, body } = req;
+  console.log("TOP OF EXPORTS");
 
   // 🌐 Spotify Setup
   const spotifyApi = new SpotifWebAPI({
