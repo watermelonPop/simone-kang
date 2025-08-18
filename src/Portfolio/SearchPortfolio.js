@@ -15,7 +15,7 @@ function SearchPortfolio({debouncedSearch, isMobile}) {
 
                 const doSearch = async () => {
                         try {
-                                const response = await fetch(`/api/projects/search?q=${debouncedSearch}`, {
+                                const response = await fetch(`https://simone-kang.vercel.app/api/projects/search?q=${debouncedSearch}`, {
                                 method: "GET",
                                 });
                 
