@@ -6,9 +6,7 @@ module.exports = async (req, res) => {
   const spotifyApi = new SpotifWebAPI({
     clientId: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
     clientSecret: process.env.REACT_APP_SPOTIFY_CLIENT_SECRET,
-    redirectUri: process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:3000',
+    redirectUri: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
   });
 
   try {
