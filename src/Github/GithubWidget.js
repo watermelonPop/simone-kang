@@ -17,7 +17,7 @@ function GithubWidget() {
                 <div className='githubContent'>
                     <div className='githubOuter' onClick={openGithub}>
                         <p className='githubIcon'><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon></p>
-                        <p className='githubUser'><FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon>@/Githubuser</p>
+                        <p className='githubUser'><FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon>@watermelonPop</p>
                     </div>
                 </div>
         </div>

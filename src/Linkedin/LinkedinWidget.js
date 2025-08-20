@@ -16,7 +16,7 @@ function LinkedinWidget() {
                 <div className='linkedinContent'>
                     <div className='linkedinOuter' onClick={openLinkedin}>
                         <p className='linkedinIcon'><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></p>
-                        <p className='linkedinUser'><FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon> @/user</p>
+                        <p className='linkedinUser'><FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon> /simone-kang-65285228b</p>
                     </div>
                 </div>
         </div>
