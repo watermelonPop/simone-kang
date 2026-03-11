@@ -1,0 +1,330 @@
+.portfolioWidgetOuterLarge{
+        width: 100%;
+        height: 100%;
+}
+
+.portfolioTitleLarge{
+        width: 100%;
+        height: 20%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--backgroundTxtColor);
+}
+
+.portfolioTitleLarge p{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 50%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+}
+
+.portfolioContentOuterCond{
+        height: 80%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+}
+
+.portfolioContentLarge{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        overflow-y: scroll;
+        row-gap: 2.5%;
+        padding-bottom: 5%;
+}
+
+.portProject{
+        background-color: var(--accentColor1);
+        border-radius: 15px;
+        width: 30%;
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+}
+
+.projectTop{
+        width: 100%;
+        height: 60%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+}
+
+.projectInfo{
+        width: 30%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+}
+
+.projectImg{
+        width: auto;
+        height: 85%;
+        border-radius: 15px;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+.projectBott{
+        width: 90%;
+        height: 40%;
+        padding-left: 5%;
+        padding-right: 5%;
+        color: var(--accentTxtColor1);
+}
+
+.projectBott p{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1; /* Change this to clamp more/fewer lines */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        justify-content: left;
+        align-items: center;
+}
+
+.imgIcon{
+    width: min(3rem, 80%);     /* Fixed max width for consistency */
+    aspect-ratio: 1 / 1;       /* Maintain square ratio */
+    border-radius: 50%;        /* Force circular shape */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accentColor2);
+    color: var(--accentTxtColor2);
+    flex-shrink: 0;            /* Prevent shrinking that can distort shape */
+    font-size: 2rem;
+}
+
+.imgIcon img {
+    height: 70%;
+    width: auto;
+    object-fit: contain;
+}
+
+.selectedProjectOuter {
+    width: 100%;
+    height: fit-content;        /* was 100%, was capping the child */
+    min-height: 100%;           /* still fills the space when content is small */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+    .selectedProjectHeader {
+        width: 100%;
+        height: 15%;         /* If you want a fixed height for visual reasons, OK */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .selectedProjectHeader button{
+        background-color: var(--accentColor1);
+        color: var(--accentTxtColor1);
+        border-radius: 15px;
+        border: none;
+        padding: 2%;
+    }
+
+    .selectedProjectBott {
+    width: 95%;
+    background-color: var(--accentColor1);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    overflow-y: auto;
+    max-height: 85vh;           /* use viewport height instead of % */
+    height: fit-content;        /* grow to content */
+    margin-bottom: 2.5%;
+}
+
+.imgInfoDiv{
+    width: 90%;
+    background-color: var(--backgroundColor);
+    color: var(--backgroundTxtColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    column-gap: 5%;
+    padding: 1rem 0;
+    /* NO overflow, NO height, NO transition here */
+}
+
+.imgInfoDivImg{
+    width: auto;
+    max-height: 15rem;
+    height: 80%;
+    border-radius: 15px;
+}
+
+.langInfoDiv{
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.langInfoDiv p{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    column-gap: 5%;
+}
+
+
+.langOuterDiv{
+    width: fit-content;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    row-gap: 0.75rem;
+    column-gap: 1rem;
+    transition: height 0.4s ease;
+    overflow: hidden;
+}
+
+.infoOuterRow, .outerAfter{
+    display: contents;  /* makes children participate directly in the parent grid */
+}
+
+.infoLabel{
+    white-space: nowrap;
+    text-align: center;
+}
+
+.infoValue{
+    min-width: 5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.infoValue a{
+    color: var(--accentColor2);
+} 
+
+.infoIcon{
+    background-color: var(--accentColor2);
+    width: auto;
+    height: 3rem;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.infoIcon p{
+    font-size: 1.5rem;
+}
+
+.infoIcon img{
+    width: 70%;
+    height: 70%;
+}
+
+.projectDesc{
+        width: 90%;
+        font-size: 1rem;
+        line-height: 2;
+        color: var(--accentTxtColor1);
+}
+
+.searchResultsOuter{
+        width: 100%;
+        height: 100%;
+        background-color: lightcoral;
+}
+
+.portSearchOuter{
+        width: 70%;
+        height: 50%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        column-gap: 2.5%;
+      }
+      
+      .portSearchBar{
+        width: 90%;
+        height: 50%;
+        border: 2px solid var(--backgroundTxtColor);
+        color: var(--backgroundTxtColor);
+        border-radius: 15px;
+        background-color: var(--backgroundColor);
+        font-family: var(--fontFamily);
+        font-weight: 450;
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      .portSearchBar::placeholder{
+        color: var(--backgroundTxtColor);
+      }
+      .portSearchBtn{
+        width: 10%;
+        height: 60%;
+        border: 2px solid var(--backgroundTxtColor);
+        color: var(--backgroundTxtColor);
+        border-radius: 15px;
+        background-color: var(--backgroundColor);
+        font-weight: 600;
+      }
+
+      .projectCardTitle{
+        font-weight: 600;
+      }
+
+      .selectedProjectTitle{
+        font-size: 1.3rem;
+        font-weight: 500;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--backgroundTxtColor);
+      }
+
+      .expandBtn{
+        background-color: var(--accentColor1);
+        padding-top: 5%;
+        padding-bottom: 5%;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }

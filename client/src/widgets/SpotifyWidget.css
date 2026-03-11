@@ -1,0 +1,90 @@
+.spotifyWidgetOff{
+    font-size: 80px;
+    color: var(--accentTxtColor1);
+    margin: 0;
+    padding: 0;
+}
+
+ .spotifyWidgetSmallOuter{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: var(--accentTxtColor1);
+      }
+
+      .spotifySmallTop{
+        width: 100%;
+        height: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .spotifySmallTop p{
+        font-size: 1.5rem;
+        width: 30%;
+        height: 70%;
+        display: flex;
+        justify-content: right;
+        align-items: flex-start;
+      }
+
+      .spotifySmallTop img{
+          width: auto;
+          height: 70%;
+          border-radius: 15px;
+      }
+
+      .spotifySmallBott{
+        width: 100%;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .spotifySmallBott p{
+        margin: 0;
+        padding: 0;
+      }
+
+      .spotifySmallTitle, .spotifySmallSubtitle {
+        font-size: 1rem; /* 0.75rem for subtitle, so separate */
+        width: 85%;
+        /* Remove height, use max-height based on line-height */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1; /* Limit to 1 line */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.2rem;  /* Set appropriate line height */
+        max-height: 1.2rem;   /* limit container height to exactly one line */
+        justify-content: flex-start; /* Fix justify-content to flex-start (left aligned) */
+        align-items: center;
+        display: -webkit-box;
+      }
+
+      .spotifySmallTitle {
+        font-size: 1rem;
+        /*line-height: 1.2rem;
+        max-height: 1.2rem;*/
+        font-weight: 550;
+      }
+      
+      .spotifySmallSubtitle {
+        font-size: 0.75rem;
+        font-weight: 500;
+        /*line-height: 1rem;
+        max-height: 1rem;*/
+      }
+
+      .spotifyWidgetOff{
+        font-size: 80px;
+        color: var(--accentTxtColor1);
+        margin: 0;
+        padding: 0;
+      }
