@@ -16,6 +16,7 @@
     "concurrently": "^9.2.1"
   },
   "dependencies": {
+    "mongodb": "^7.1.0",
     "spotify-web-api-node": "^5.0.2"
   }
 }
