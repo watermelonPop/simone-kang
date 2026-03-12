@@ -1,14 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
-import SpotifyWebApi from "spotify-web-api-node";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import '../App.css'
 import './SpotifyWidget.css'
-
-const spotify_client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID as string;
-const spotifyApi = new SpotifyWebApi({
-    clientId: spotify_client_id,
-});
 
 interface SpotifyWidgetProps {
     accessToken: string | null

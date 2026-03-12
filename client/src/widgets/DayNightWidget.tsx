@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import '../App.css'
 import './DayNightWidget.css'
 
@@ -76,7 +76,7 @@ function DayNightWidget(){
     return (
         <div className="canvas">
             {/* Crossfade backgrounds */}
-            {backgrounds.map((bg, i) => (
+            {backgrounds.map((bg) => (
                 <div
                     key={bg.phase}
                     className={`bg-gradient bg-${bg.phase}`}
