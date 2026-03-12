@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolderOpen, faSquareCaretLeft, faSquareCaretRight, faHeart } from '@fortawesome/free-solid-svg-icons';
 import type {Project} from '../types'

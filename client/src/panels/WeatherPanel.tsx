@@ -102,11 +102,7 @@ function WeatherPanel({ isMobile }: WeatherPanelProps){
     const [weatherWidgetInfo, setWeatherWidgetInfo] = useState<WeatherInfo | null>(null);
     const [todayInfo, setTodayInfo] = useState<WeatherToday | null>(null);
     const [weekInfo, setWeekInfo] = useState<WeatherDay[] | null>(null);
-    const [twoWeekInfo, setTwoWeekInfo] = useState<WeatherDay[] | null>(null);
-
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [endDate, setEndDate] = useState((new Date()).getDate() + 7);
-
     const [openDays, setOpenDays] = useState(new Set());
     const navigate = useNavigate();
     const location2 = useLocation();
@@ -125,7 +121,6 @@ function WeatherPanel({ isMobile }: WeatherPanelProps){
         const timer = setInterval(() => {
             let cDate = new Date();
             setCurrentDate(cDate);
-            setEndDate(cDate.getDate() + 7);
         }, 100000);
         return () => clearInterval(timer);
     }, []);
@@ -212,7 +207,6 @@ function WeatherPanel({ isMobile }: WeatherPanelProps){
                 if (data && data.current && data.location && data.forecast) {
                     console.log("HIII: ", data);
                     let tempWeek:WeatherDay[] = [];
-                    const todayAPIDate = getAPIDateStr(new Date());
                     const forecastDays = data.forecast.forecastday;
                     for(let j = 0; j < forecastDays.length; j++){
                         const dayData = forecastDays[j];
@@ -227,39 +221,6 @@ function WeatherPanel({ isMobile }: WeatherPanelProps){
                     }
 
                     setWeekInfo(tempWeek);
-                    console.log(tempWeek);
-                } 
-            })
-            .catch(err => {
-                console.warn(err);
-            });
-    }, [location, currentDate]);
-
-     //fill up twoweekInfo
-    useEffect(() => {
-        fetch(`https://api.weatherapi.com/v1/forecast.json?key=8c425ce1c19b47e1a06202208250407&q=${location.lat},${location.lon}&days=14`)
-            .then(res => {
-                if (!res.ok) throw new Error("Weather API error");
-                return res.json();
-            })
-            .then(data => {
-                if (data && data.current && data.location && data.forecast) {
-                    let tempWeek: WeatherDay[] = [];
-                    const todayAPIDate = getAPIDateStr(new Date());
-                    const forecastDays = data.forecast.forecastday;
-                    for(let j = 0; j < forecastDays.length; j++){
-                        const dayData = forecastDays[j];
-                        let tempHours: WeatherHour[] = [];
-                        for(let i = 0; i < dayData.hour.length; i++){
-                            let tempHour: WeatherHour = {time: dayData.hour[i].time, temp_f: dayData.hour[i].temp_f, condition: dayData.hour[i].condition.text, conditionIcon: dayData.hour[i].condition.icon, feels_like_f: dayData.hour[i].feelslike_f};
-                            tempHours.push(tempHour);
-                        }
-
-                        let tempDay: WeatherDay = {date: getDateStr(new Date(dayData.date)), maxTemp:  dayData.day.maxtemp_f, minTemp: dayData.day.mintemp_f, condition: dayData.day.condition.text, conditionIcon: dayData.day.condition.icon, hours: tempHours}
-                        tempWeek.push(tempDay);
-                    }
-
-                    setTwoWeekInfo(tempWeek);
                     console.log(tempWeek);
                 } 
             })
@@ -304,11 +265,6 @@ function WeatherPanel({ isMobile }: WeatherPanelProps){
           }
           return newSet;
         });
-    };
-
-    const getAPIDateStr = (d: Date) => {
-        // Format: YYYY-MM-DD
-        return d.toISOString().split('T')[0];
     };
 
     return (
