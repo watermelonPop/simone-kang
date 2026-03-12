@@ -17,6 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const projects = await db.collection('New-Projects').find({}).toArray();
     res.status(200).json(projects);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch projects' });
+    console.error("DB connection error:", err);  // ← add this
+    res.status(500).json({ error: String(err) }); // ← return actual error temporarily
   }
 }
