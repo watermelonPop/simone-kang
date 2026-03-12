@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faAddressBook, faFolderOpen, faCircleInfo, faGear, faFile } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin, faSpotify } from '@fortawesome/free-brands-svg-icons';
@@ -10,12 +9,11 @@ import SpotifyWidget from './widgets/SpotifyWidget';
 
 interface MobileHomeScreenProps {
     accessToken: string | null
-    isMobile: boolean
     openModal: (page: string) => void
     currentSong: any
 }
 
-function MobileHomeScreen({ accessToken, isMobile, openModal, currentSong }: MobileHomeScreenProps){
+function MobileHomeScreen({ accessToken, openModal, currentSong }: MobileHomeScreenProps){
     return (
     <>
         <div className="mobileHomeScreenOuter">

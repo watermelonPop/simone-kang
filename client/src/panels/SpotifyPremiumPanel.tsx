@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faForward, faBackward, faPause, faVolumeHigh, faRepeat, faShuffle, faHeart, faMusic, faMagnifyingGlass, faList, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -108,7 +108,7 @@ function SpotifyPremiumPanel({ accessToken, search, setSearch, searchResults, se
                 console.log("TRACK: ", track);
                 if(track.liked === false){
                         try{
-                                const val = await handleLikeSong(track);
+                                await handleLikeSong(track);
                                 setCurrentSong({...track, liked: true});
                         }catch (error) {
                                 console.error('Error: ', error);
@@ -117,7 +117,7 @@ function SpotifyPremiumPanel({ accessToken, search, setSearch, searchResults, se
                         } 
                 }else if(track.liked === true){
                         try{
-                                const val = await handleUnlikeSong(track);
+                                await handleUnlikeSong(track);
                         
                                 setCurrentSong({...track, liked: false});
                                 

@@ -28,7 +28,7 @@ function SpotifyFreePanel({ search,setSearch,searchResults,setSearchResults,sele
         console.log("TRACK: ", track);
         if(track.liked === false){
                 try{
-                        const val = await handleLikeSong(track);
+                        await handleLikeSong(track);
                         setSearchResults(prevResults => (prevResults.map(item =>
                                 item.id === track.id
                                   ? { ...item, liked: true }
@@ -41,7 +41,7 @@ function SpotifyFreePanel({ search,setSearch,searchResults,setSearchResults,sele
                 } 
         }else if(track.liked === true){
                 try{
-                        const val = await handleUnlikeSong(track);
+                        await handleUnlikeSong(track);
                 
                         setSearchResults(prevResults => (prevResults.map(item =>
                                 item.id === track.id
@@ -63,7 +63,7 @@ function SpotifyFreePanel({ search,setSearch,searchResults,setSearchResults,sele
         console.log("PLAYLIST: ", selectedPlaylist);
         if(track.liked === false){
                 try{
-                        const val = await handleLikeSong(track);
+                        await handleLikeSong(track);
                         setSelectedPlaylist((prevPlaylist: any) => ({
                                 ...prevPlaylist,
                                 tracks: {
@@ -86,7 +86,7 @@ function SpotifyFreePanel({ search,setSearch,searchResults,setSearchResults,sele
                 } 
         }else if(track.liked === true){
                 try{
-                        const val = await handleUnlikeSong(track);
+                        await handleUnlikeSong(track);
                         setSelectedPlaylist((prevPlaylist: any) => ({
                                 ...prevPlaylist,
                                 tracks: {

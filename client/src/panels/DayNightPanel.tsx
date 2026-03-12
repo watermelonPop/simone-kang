@@ -127,7 +127,7 @@ function DayNightPanel(){
     return (
         <div className="canvas">
             {/* Crossfade backgrounds */}
-            {backgrounds.map((bg, i) => (
+            {backgrounds.map((bg) => (
                 <div
                     key={bg.phase}
                     className={`bg-gradient bg-${bg.phase}`}

@@ -285,7 +285,7 @@ function SpotifyPanel({ accessToken, loggedIn, setLoggedIn, user, setUser, isMob
 
     const handleLikeSong = async (track: any) => {
             spotifyApi.addToMySavedTracks([track.id])
-            .then(function(data) {
+            .then(function() {
             }, function(err) {
                     console.log('Something went wrong!', err);
             });

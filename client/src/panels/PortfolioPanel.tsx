@@ -1,7 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect} from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import type {Project} from '../types'
 import SearchPortfolioPanel from './SearchPortfolioPanel';
 import ProjectsPortfolioPanel from './ProjectsPortfolioPanel';
@@ -24,10 +22,6 @@ function PortfolioPanel({ projects, isMobile }: PortfolioPanelProps){
             return projects.find(p => p.name.replace(/\s+/g, '-') === projectSlug) ?? null;
         }
         return null;
-    });
-    const [pendingSlug] = useState<string | null>(() => {
-        const parts = location.pathname.split('/');
-        return parts[2] ?? null;
     });
 
     const [search, setSearch] = useState<string>(() => {

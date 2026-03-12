@@ -485,7 +485,7 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
     }
     
     return (
-    <>{isMobile ? <MobileHomeScreen accessToken={accessToken} isMobile={isMobile} openModal={openModal} currentSong={currentSong} /> : (
+    <>{isMobile ? <MobileHomeScreen accessToken={accessToken} openModal={openModal} currentSong={currentSong} /> : (
         <div className="homeScreenOuter">
             <div className='homeTopOuter'>
                 <div className='sideBarHome'>

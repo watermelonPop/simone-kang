@@ -1,6 +1,3 @@
-import { useState, useEffect, useRef } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import '../App.css'
 import './AboutMePanel.css'
 

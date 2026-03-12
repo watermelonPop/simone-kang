@@ -46,9 +46,6 @@ function SelectedProjectPortfolioPanel({ selectedProject, setSelectedProject, is
     const frontEndList = selectedProject?.front_end ?? [];
     const backEndList = selectedProject?.back_end ?? [];
 
-    const visibleFrontEnd = frontEndExpanded ? frontEndList : frontEndList.slice(0, 1);
-    const visibleBackEnd = backEndExpanded ? backEndList : backEndList.slice(0, 1);
-
     const gridRef = useRef<HTMLDivElement>(null);
     const imgRef = useRef<HTMLImageElement>(null);
     const [gridHeight, setGridHeight] = useState<number>(0);
