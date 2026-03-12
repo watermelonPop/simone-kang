@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom';
 import SpotifyWebApi from "spotify-web-api-node";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
@@ -46,10 +46,10 @@ function SpotifyPanel({ accessToken, loggedIn, setLoggedIn, user, setUser, isMob
         const params = new URLSearchParams(location.search);
         return params.get('query') ?? '';
     });
-    const [searchType, setSearchType] = useState("tracks");
+    const searchType = "tracks";
     const [searchResults, setSearchResults] = useState<any[]>([]);
     const [debouncedSearch, setDebouncedSearch] = useState("");
-    const [playlists, setPlaylists] = useState([]);
+    const [playlists, setPlaylists] = useState<any[]>([]);
     const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(null);
     const [selectedPlaylist, setSelectedPlaylist] = useState(null);
 
@@ -87,30 +87,30 @@ function SpotifyPanel({ accessToken, loggedIn, setLoggedIn, user, setUser, isMob
             try{
                 if (searchType === "tracks") {
                     const data = await spotifyApi.searchTracks(search, { limit: 50 });
-                    let items = data.body.tracks.items;
-                
+                    let items = data?.body?.tracks?.items ?? [];
+
                     // Remove duplicates by track ID
                     const seen = new Set();
                     items = items.filter(track => {
-                      if (seen.has(track.id)) {
-                        return false;
-                      } 
-                      seen.add(track.id);
-                      return true;
+                        if (seen.has(track.id)) return false;
+                        seen.add(track.id);
+                        return true;
                     });
-                
-                    const ids = items.map(track => track.id).filter(Boolean);
-                    const chunkedIds = [];
+
+                    const ids = items.map(track => track.id).filter((id): id is string => Boolean(id));
+
+                    const chunkedIds: string[][] = [];
                     for (let i = 0; i < ids.length; i += 50) {
-                      chunkedIds.push(ids.slice(i, i + 50));
+                        chunkedIds.push(ids.slice(i, i + 50));
                     }
+
                     const likedStatusChunks = await Promise.all(
-                      chunkedIds.map(chunk => checkIfLiked(chunk))
+                        chunkedIds.map(chunk => checkIfLiked(chunk))
                     );
                     const likedStatusArray = likedStatusChunks.flat();
                     const itemsWithLiked = items.map((item, i) => ({
-                      ...item,
-                      liked: likedStatusArray[i],
+                        ...item,
+                        liked: likedStatusArray[i],
                     }));
                     setSearchResults(itemsWithLiked);
                 }
@@ -191,7 +191,7 @@ function SpotifyPanel({ accessToken, loggedIn, setLoggedIn, user, setUser, isMob
         const fetchSelectedPlaylist = async () => {
             try {
                 // Get initial playlist data (includes first 100 tracks)
-                const playlistResponse = await spotifyApi.getPlaylist(selectedPlaylistId, { limit: 100, offset: 0 });
+                const playlistResponse: any = await spotifyApi.getPlaylist(selectedPlaylistId);
                 const playlist = playlistResponse.body;
                 let allTracks = [...playlist.tracks.items];
         
@@ -211,7 +211,7 @@ function SpotifyPanel({ accessToken, loggedIn, setLoggedIn, user, setUser, isMob
                     .filter(Boolean);
         
                 // Check liked status in batches of 50
-                let likedStatusArray = [];
+                let likedStatusArray:any[] = [];
                 for (let i = 0; i < trackIds.length; i += 50) {
                     const batch = trackIds.slice(i, i + 50);
                     const likedStatus = await checkIfLiked(batch);
@@ -247,7 +247,7 @@ function SpotifyPanel({ accessToken, loggedIn, setLoggedIn, user, setUser, isMob
     }, [accessToken, selectedPlaylistId]);
 
 
-    const checkIfLiked = async (ids) => {
+    const checkIfLiked = async (ids: string[]) => {
         //max: 50
         try {
                 const idsStr = ids.join(',');
@@ -270,7 +270,7 @@ function SpotifyPanel({ accessToken, loggedIn, setLoggedIn, user, setUser, isMob
         }
     };
 
-    const handleUnlikeSong = async (track) => {
+    const handleUnlikeSong = async (track: any) => {
         if (!spotifyApi.getAccessToken()) {
             console.warn("Spotify access token is missing");
             return;
@@ -283,7 +283,7 @@ function SpotifyPanel({ accessToken, loggedIn, setLoggedIn, user, setUser, isMob
         }
     };
 
-    const handleLikeSong = async (track) => {
+    const handleLikeSong = async (track: any) => {
             spotifyApi.addToMySavedTracks([track.id])
             .then(function(data) {
             }, function(err) {

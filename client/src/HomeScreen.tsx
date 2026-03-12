@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SpotifyWebApi from "spotify-web-api-node";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faFile, faSquareXmark, faPlay, faForward, faBackward, faPause, faVolumeHigh, faRepeat, faShuffle, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
@@ -46,8 +46,8 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
     const [currentDate, setCurrentDate] = useState(new Date());
     const [modalOpen, setModalOpen] = useState(false);
     const [showBackdrop, setShowBackdrop] = useState(false); // controls DOM presence
-    const modalRef = useRef();
-    const [modalPage, setModalPage] = useState(null);
+    const modalRef = useRef<HTMLDivElement | null>(null);
+    const [modalPage, setModalPage] = useState<string | null>(null);
     const [redirectDone, setRedirectDone] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -55,7 +55,7 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
     const [shuffleOn, setShuffleOn] = useState(false);
     const [volume, setVolume] = useState(0);
     const [repeatState, setRepeatState] = useState<string | null>(null);
-    const [currentSong, setCurrentSong] = useState(null);
+    const [currentSong, setCurrentSong] = useState<any>(null);
     const [bottomSlidingOut, setBottomSlidingOut] = useState(false);
     const [bottomHidden, setBottomHidden] = useState(false);
     const [bottomSlidingIn, setBottomSlidingIn] = useState(false);
@@ -111,7 +111,7 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
                     { headers: { Authorization: `Bearer ${accessToken}` } }
                 );
                 const data = await response.json();
-                setCurrentSong(prev => prev ? { ...prev, liked: data[0] } : prev);
+                setCurrentSong((prev:any) => prev ? { ...prev, liked: data[0] } : prev);
             } catch (err) {
                 console.error('Error fetching liked status for current song:', err);
             }
@@ -155,7 +155,7 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
                         if (data.body && data.body.shuffle_state !== undefined) {
                             setShuffleOn(data.body.shuffle_state);
                         }
-                        if(data.body && data.body.device.volume_percent !== undefined){
+                        if(data.body && data.body.device.volume_percent !== undefined && data.body.device.volume_percent !== null){
                                 //alert("HELLO");
                                 setVolume(data.body.device.volume_percent);
                                 if(document.getElementById("volume") !== null){
@@ -165,7 +165,7 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
                         if(data.body && data.body.repeat_state !== undefined){
                                 setRepeatState(data.body.repeat_state);
                         }
-                        if(data.body && data.body.progress_ms !== undefined){
+                        if(data.body && data.body.progress_ms !== undefined && data.body.progress_ms !== null){
                             setProgressMs(data.body.progress_ms);
                         }
                 }, function(err) {
@@ -228,9 +228,9 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
                 const data = await spotifyApi.getMyCurrentPlayingTrack();
                 if (data.body && data.body.item) {
                     console.log('Now playing: ' + data.body.item.name);
-                    setCurrentSong(prev => {
+                    setCurrentSong((prev:any) => {
                         // Preserve liked status if it's the same song
-                        if (prev && prev.id === data.body.item.id) {
+                        if (prev && prev.id === data?.body?.item?.id) {
                             return { ...data.body.item, liked: prev.liked };
                         }
                         return data.body.item; // new song, liked will be set by the useEffect above
@@ -410,7 +410,7 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
         });
     };
 
-    const handleSetRepeatState = (val) => {
+    const handleSetRepeatState = (val:any) => {
         spotifyApi.setRepeat(val)
         .then(function () {
                 setRepeatState(val);
@@ -419,7 +419,7 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
         //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
                 console.log('Something went wrong!', err);
         });
-};
+    };
 
     const toggleRepeatState = () => {
         if(repeatState == "off"){
@@ -433,7 +433,7 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
 
 
     const debouncedSetVolume = useCallback(
-        debounce((newVolume) => {
+        debounce((newVolume: number) => {
         if (!accessToken || !spotifyApi.getAccessToken()) return;
         spotifyApi.setVolume(newVolume)
             .then(() => {
@@ -446,13 +446,13 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
         [accessToken]
     );
   
-    const handleVolumeChange = useCallback((newVolume) => {
+    const handleVolumeChange = useCallback((newVolume: number) => {
         setVolume(newVolume);
         debouncedSetVolume(newVolume);
     }, [debouncedSetVolume]);
 
     const debouncedSeek = useCallback(
-        debounce((newProgress) => {
+        debounce((newProgress: number) => {
         if (!accessToken || !spotifyApi.getAccessToken()) return;
         spotifyApi.seek(newProgress)
             .then(() => {
@@ -465,20 +465,20 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
         [accessToken]
     );
 
-    const handleProgressChange = useCallback((newProgress) => {
+    const handleProgressChange = useCallback((newProgress: number) => {
         setProgressMs(newProgress);
         debouncedSeek(newProgress);
     }, [debouncedSeek]);
 
-    function msToMinutesAndSeconds(ms) {
+    function msToMinutesAndSeconds(ms: number) {
         const minutes = Math.floor(ms / 60000);
         const seconds = Math.floor((ms % 60000) / 1000);
         return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
     }
 
-    function debounce(func, delay) {
-            let timeout;
-            return (...args) => {
+    function debounce(func: any, delay: any) {
+            let timeout: any;
+            return (...args: any[]) => {
             clearTimeout(timeout);
             timeout = setTimeout(() => func(...args), delay);
             };
@@ -579,14 +579,14 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
                             <div className='bottControls'>
                                 <p>{progressMs !== null ? msToMinutesAndSeconds(progressMs) : "0:00"}</p>
                                 <input id="songTime" type="range" min="0" 
-                                max={currentSong?.duration_ms} value={progressMs} onChange={(e) => handleProgressChange(e.target.value)}></input>
+                                max={currentSong?.duration_ms} value={progressMs} onChange={(e) => handleProgressChange(Number(e.target.value))}></input>
                                 <p>{msToMinutesAndSeconds(currentSong?.duration_ms)}</p>
                             </div>
                         </div>
                         <div className='volumeDiv'>
                                 <p><FontAwesomeIcon icon={faVolumeHigh}></FontAwesomeIcon></p>
                                 <input type="range" id="volume" min="0" 
-                                max="100" value={volume} onChange={(e) => handleVolumeChange(e.target.value)}></input>
+                                max="100" value={volume} onChange={(e) => handleVolumeChange(Number(e.target.value))}></input>
                         </div>
                         </div>
                     </div>
@@ -612,16 +612,16 @@ function HomeScreen({ accessToken, isMobile, handleUnlock, themes, currentTheme,
                     >
                     <button className="modalCloseBtn" onClick={closeModal}><FontAwesomeIcon icon={faSquareXmark}></FontAwesomeIcon></button>
                     {
-                            modalPage.startsWith("Spotify") ? <SpotifyPanel accessToken={accessToken} loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} setUser={setUser} isMobile={isMobile} isPlaying={isPlaying} progressMs={progressMs} shuffleOn={shuffleOn} volume={volume} repeatState={repeatState} currentSong={currentSong} setCurrentSong={setCurrentSong} pause={pause} play={play} previous={previous} next={next} toggleShuffle={toggleShuffle} toggleRepeatState={toggleRepeatState} handleVolumeChange={handleVolumeChange} handleProgressChange={handleProgressChange} msToMinutesAndSeconds={msToMinutesAndSeconds}/> :
+                            modalPage?.startsWith("Spotify") ? <SpotifyPanel accessToken={accessToken} loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} setUser={setUser} isMobile={isMobile} isPlaying={isPlaying} progressMs={progressMs} shuffleOn={shuffleOn} volume={volume} repeatState={repeatState} currentSong={currentSong} setCurrentSong={setCurrentSong} pause={pause} play={play} previous={previous} next={next} toggleShuffle={toggleShuffle} toggleRepeatState={toggleRepeatState} handleVolumeChange={handleVolumeChange} handleProgressChange={handleProgressChange} msToMinutesAndSeconds={msToMinutesAndSeconds}/> :
                             modalPage === "DayNight" ? <DayNightPanel/> :
                             modalPage === "Contact" ? <ContactPanel isMobile={isMobile}/> :
-                            modalPage.startsWith("Portfolio") ? <PortfolioPanel projects={projects} isMobile={isMobile}/> :
+                            modalPage?.startsWith("Portfolio") ? <PortfolioPanel projects={projects} isMobile={isMobile}/> :
                             modalPage === "AboutMe" ? <AboutMePanel /> :
                             modalPage === "Settings" ? <SettingsPanel themes={themes} currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} /> :
                             modalPage === "Resume" ? <ResumePanel isMobile={isMobile} /> :
                             modalPage === "Github" ? <GithubPanel isMobile={isMobile} /> :
                             modalPage === "Linkedin" ? <LinkedinPanel isMobile={isMobile} /> :
-                            modalPage.startsWith("Weather") ? <WeatherPanel isMobile={isMobile} /> :
+                            modalPage?.startsWith("Weather") ? <WeatherPanel isMobile={isMobile} /> :
                             <p></p>
                     }
 

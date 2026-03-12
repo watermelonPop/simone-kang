@@ -13,7 +13,7 @@ function App() {
   const [refreshToken, setRefreshToken] = useState<string | null>(null);
   const [expiresIn, setExpiresIn] = useState<number | null>(null);
   const hasExchangedCodeRef = useRef<boolean>(false); // instead of state
-    const [themes, setThemes] = useState<Theme[]>([
+    const themes:Theme[] = [
     {
       name: "strawberry", 
       backgroundColor: "#FCF7EB", 
@@ -54,7 +54,7 @@ function App() {
       accentTxtColor2: "#000000",
       fontFamily: '"Lexend", sans-serif',
     },
-  ]);
+  ];
 
   const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
     const stored = localStorage.getItem("currentTheme");

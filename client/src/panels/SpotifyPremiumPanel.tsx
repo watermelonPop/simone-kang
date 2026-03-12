@@ -1,24 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
-import SpotifyWebApi from "spotify-web-api-node";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faForward, faBackward, faPause, faVolumeHigh, faRepeat, faShuffle, faHeart, faMusic, faMagnifyingGlass, faList, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import '../App.css'
 import './SpotifyPanel.css'
-
-const spotify_client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID as string;
-const spotify_redirect_uri = import.meta.env.VITE_SPOTIFY_REDIRECT_URI as string;
-const spotifyApi = new SpotifyWebApi({
-    clientId: spotify_client_id,
-});
 
 interface SpotifyPremiumPanelProps {
     accessToken: string | null
     search: string
     setSearch: (search: string) => void
     searchResults: any[]
-    setSearchResults: (res: any[]) => void
+    setSearchResults: React.Dispatch<React.SetStateAction<any[]>>
     selectedPlaylist: any 
     setSelectedPlaylist: (playlist: any) => void
     playlists: any[]
@@ -102,7 +94,7 @@ function SpotifyPremiumPanel({ accessToken, search, setSearch, searchResults, se
 
         const handlePlayTrack = async (track: any) => {
                 try {
-                        const val = await handleAddToQueue(track.uri);
+                        await handleAddToQueue(track.uri);
                         setCurrentSong(track);
                         next();
                 } catch (error) {
@@ -138,94 +130,81 @@ function SpotifyPremiumPanel({ accessToken, search, setSearch, searchResults, se
         };
 
 
-        const handleToggleLikeSearch = async (track: any, e) => {
+        const handleToggleLikeSearch = async (track: any, e: React.MouseEvent) => {
                 e.stopPropagation();
                 console.log("TRACK: ", track);
-                if(track.liked === false){
-                        try{
-                                const val = await handleLikeSong(track);
-                                setSearchResults(prevResults => (prevResults.map(item =>
-                                        item.id === track.id
-                                        ? { ...item, liked: true }
-                                        : item
-                                )));
-                        }catch (error) {
-                                console.error('Error: ', error);
-                                // Set all tracks to false in case of error
-                                //ids.forEach(id => newLikedStatus[id] = false);
-                        } 
-                }else if(track.liked === true){
-                        try{
-                                const val = await handleUnlikeSong(track);
-                        
-                                setSearchResults(prevResults => (prevResults.map(item =>
-                                        item.id === track.id
-                                        ? { ...item, liked: false }
-                                        : item
-                                )));
-                                
-                        }catch (error) {
-                                console.error('Error: ', error);
-                                // Set all tracks to false in case of error
-                                //ids.forEach(id => newLikedStatus[id] = false);
-                        } 
+
+                try {
+                        await (track.liked ? handleUnlikeSong(track) : handleLikeSong(track));
+
+                        setSearchResults((prevResults: any[]) =>
+                        prevResults.map((item: any) =>
+                                item.id === track.id
+                                ? { ...item, liked: !track.liked }
+                                : item
+                        )
+                        );
+
+                } catch (error) {
+                        console.error('Error: ', error);
                 }
-        };
+                };
 
 
-        const handleToggleLikePlaylists = async (track: any, e) => {
+        const handleToggleLikePlaylists = async (track: any, e: React.MouseEvent) => {
                 e.stopPropagation();
+
                 console.log("TRACK: ", track);
                 console.log("PLAYLIST: ", selectedPlaylist);
-                if(track.liked === false){
-                        try{
-                                const val = await handleLikeSong(track);
-                                setSelectedPlaylist(prevPlaylist => ({
-                                        ...prevPlaylist,
-                                        tracks: {
-                                        ...prevPlaylist.tracks,
-                                        items: prevPlaylist.tracks.items.map(item =>
-                                                item.track.id === track.id
-                                                ? { 
-                                                        ...item, 
-                                                        track: { ...item.track, liked: true } // toggle liked on .track
-                                                }
-                                                : item
-                                        )
+
+                if (track.liked === false) {
+                        try {
+                        await handleLikeSong(track);
+
+                        setSelectedPlaylist((prevPlaylist: any) => ({
+                                ...prevPlaylist,
+                                tracks: {
+                                ...prevPlaylist.tracks,
+                                items: prevPlaylist.tracks.items.map((item: any) =>
+                                        item.track.id === track.id
+                                        ? {
+                                                ...item,
+                                                track: { ...item.track, liked: true }
                                         }
-                                }));
-                                
-                        }catch (error) {
-                                console.error('Error: ', error);
-                                // Set all tracks to false in case of error
-                                //ids.forEach(id => newLikedStatus[id] = false);
-                        } 
-                }else if(track.liked === true){
-                        try{
-                                const val = await handleUnlikeSong(track);
-                                setSelectedPlaylist(prevPlaylist => ({
-                                        ...prevPlaylist,
-                                        tracks: {
-                                        ...prevPlaylist.tracks,
-                                        items: prevPlaylist.tracks.items.map(item =>
-                                                item.track.id === track.id
-                                                ? { 
-                                                        ...item, 
-                                                        track: { ...item.track, liked: false } // toggle liked on .track
-                                                }
-                                                : item
-                                        )
+                                        : item
+                                )
+                                }
+                        }));
+
+                        } catch (error) {
+                        console.error('Error: ', error);
+                        }
+
+                } else if (track.liked === true) {
+
+                        try {
+                        await handleUnlikeSong(track);
+
+                        setSelectedPlaylist((prevPlaylist: any) => ({
+                                ...prevPlaylist,
+                                tracks: {
+                                ...prevPlaylist.tracks,
+                                items: prevPlaylist.tracks.items.map((item: any) =>
+                                        item.track.id === track.id
+                                        ? {
+                                                ...item,
+                                                track: { ...item.track, liked: false }
                                         }
-                                }));
-                                
-                                
-                        }catch (error) {
-                                console.error('Error: ', error);
-                                // Set all tracks to false in case of error
-                                //ids.forEach(id => newLikedStatus[id] = false);
-                        } 
+                                        : item
+                                )
+                                }
+                        }));
+
+                        } catch (error) {
+                        console.error('Error: ', error);
+                        }
                 }
-        };  
+                };
 
     return (
         <>
@@ -267,7 +246,7 @@ function SpotifyPremiumPanel({ accessToken, search, setSearch, searchResults, se
                                         <div className='bottControls'>
                                         <p>{progressMs !== null ? msToMinutesAndSeconds(progressMs) : "0:00"}</p>
                                         <input id="songTime" type="range" min="0" 
-                                        max={currentSong?.duration_ms} value={progressMs} onChange={(e) => handleProgressChange(e.target.value)}></input>
+                                        max={currentSong?.duration_ms} value={progressMs} onChange={(e) => handleProgressChange(Number(e.target.value))}></input>
                                         <p>{msToMinutesAndSeconds(currentSong?.duration_ms)}</p>
                                         </div>
                                         <div className='topControls'>
@@ -313,7 +292,7 @@ function SpotifyPremiumPanel({ accessToken, search, setSearch, searchResults, se
                                 </div>
                         </div>
                         <div className='searchResultsDiv'>
-                                {searchResults.map((track, idx) => (
+                                {searchResults.map((track) => (
                                         <>
                                         <div className='songDiv' onClick={()=>handlePlayTrack(track)}>
                                         <img src={track?.album?.images?.[0]?.url}></img>
@@ -355,7 +334,7 @@ function SpotifyPremiumPanel({ accessToken, search, setSearch, searchResults, se
                         {selectedPlaylist === null ? (
                                 <>
                                 <div className='scrollPlaylist'>
-                                {playlists.map((plist, idx) => (
+                                {playlists.map((plist) => (
                                 <>
                                 <div className='playlistSongDiv' onClick={()=>setSelectedPlaylistId(plist.id)}>
                                         <div className='playlistImgDiv'>
@@ -380,7 +359,7 @@ function SpotifyPremiumPanel({ accessToken, search, setSearch, searchResults, se
                                         <p>{selectedPlaylist.name} ({selectedPlaylist?.tracks?.items?.length} Songs)</p>
                                 </div>
                                 <div className='playlistTracksDiv'>
-                                {selectedPlaylist ? selectedPlaylist?.tracks?.items?.filter(item => item?.track?.id != null).filter((item, index, self) => index === self.findIndex(t => t?.track?.id === item?.track?.id)).map((track, idx) => (
+                                {selectedPlaylist ? selectedPlaylist?.tracks?.items?.filter((item:any) => item?.track?.id != null).filter((item:any, index:any, self:any) => index === self.findIndex((t:any) => t?.track?.id === item?.track?.id)).map((track: any) => (
                                         <>
                                         <div className='songDiv' onClick={()=>handlePlayTrack(track.track)}>
                                         <img src={track?.track?.album?.images?.[0]?.url || "/logo192.png"}></img>

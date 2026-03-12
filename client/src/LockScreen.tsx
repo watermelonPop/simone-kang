@@ -12,7 +12,7 @@ interface LockScreenProps {
 
 function LockScreen({ setIsUnlocked, isMobile }: LockScreenProps){
     const [currentDate, setCurrentDate] = useState(new Date());
-    const touchStartY = useRef(null);
+    const touchStartY = useRef<number | null>(null);
     const unlock = () => setIsUnlocked(true);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ function LockScreen({ setIsUnlocked, isMobile }: LockScreenProps){
     });
 
     useEffect(() => {
-        function onKeyDown(e) {
+        function onKeyDown(e: KeyboardEvent) {
             if (e.key === 'ArrowUp') unlock();
         }
         function onClick() {
@@ -50,13 +50,14 @@ function LockScreen({ setIsUnlocked, isMobile }: LockScreenProps){
             window.removeEventListener('click', onClick);
         };
     }, [unlock]);
+
     useEffect(() => {
-        function onTouchStart(e) {
+        function onTouchStart(e: TouchEvent) {
             if (e.touches && e.touches.length === 1) {
                 touchStartY.current = e.touches[0].clientY;
             }
         }
-        function onTouchEnd(e) {
+        function onTouchEnd(e: TouchEvent) {
             if (e.changedTouches && e.changedTouches.length === 1 && touchStartY.current !== null) {
                 const deltaY = touchStartY.current - e.changedTouches[0].clientY;
                 if (deltaY > 50) { // Swipe up threshold (px)

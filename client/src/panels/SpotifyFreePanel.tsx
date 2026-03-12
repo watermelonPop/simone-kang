@@ -1,22 +1,14 @@
-import { useState, useEffect, useRef } from 'react'
-import SpotifyWebApi from "spotify-web-api-node";
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faForward, faBackward, faPause, faVolumeHigh, faRepeat, faShuffle, faHeart, faMusic, faMagnifyingGlass, faList, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+import { faHeart, faMagnifyingGlass, faList, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import '../App.css'
 import './SpotifyPanel.css'
-
-const spotify_client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID as string;
-const spotify_redirect_uri = import.meta.env.VITE_SPOTIFY_REDIRECT_URI as string;
-const spotifyApi = new SpotifyWebApi({
-    clientId: spotify_client_id,
-});
 
 interface SpotifyFreePanelProps {
     search: string
     setSearch: (search: string) => void
     searchResults: any[]
-    setSearchResults: (res: any[]) => void
+    setSearchResults: React.Dispatch<React.SetStateAction<any[]>>
     selectedPlaylist: any 
     setSelectedPlaylist: (playlist: any) => void
     setSelectedPlaylistId: (id: string | null ) => void
@@ -31,7 +23,7 @@ interface SpotifyFreePanelProps {
 function SpotifyFreePanel({ search,setSearch,searchResults,setSearchResults,selectedPlaylist,setSelectedPlaylist,setSelectedPlaylistId,handleUnlikeSong,handleLikeSong,playlists,loggedIn,msToMinutesAndSeconds }: SpotifyFreePanelProps){
     const [selectedPanel, setSelectedPanel] = useState("Search");
 
-    const handleToggleLikeSearch = async (track, e) => {
+    const handleToggleLikeSearch = async (track: any, e: React.MouseEvent) => {
         e.stopPropagation();
         console.log("TRACK: ", track);
         if(track.liked === false){
@@ -65,18 +57,18 @@ function SpotifyFreePanel({ search,setSearch,searchResults,setSearchResults,sele
         }
     };
 
-    const handleToggleLikePlaylists = async (track, e) => {
+    const handleToggleLikePlaylists = async (track: any, e: React.MouseEvent) => {
         e.stopPropagation();
         console.log("TRACK: ", track);
         console.log("PLAYLIST: ", selectedPlaylist);
         if(track.liked === false){
                 try{
                         const val = await handleLikeSong(track);
-                        setSelectedPlaylist(prevPlaylist => ({
+                        setSelectedPlaylist((prevPlaylist: any) => ({
                                 ...prevPlaylist,
                                 tracks: {
                                     ...prevPlaylist.tracks,
-                                    items: prevPlaylist.tracks.items.map(item =>
+                                    items: prevPlaylist.tracks.items.map((item: any) =>
                                         item.track.id === track.id
                                             ? { 
                                                 ...item, 
@@ -95,11 +87,11 @@ function SpotifyFreePanel({ search,setSearch,searchResults,setSearchResults,sele
         }else if(track.liked === true){
                 try{
                         const val = await handleUnlikeSong(track);
-                        setSelectedPlaylist(prevPlaylist => ({
+                        setSelectedPlaylist((prevPlaylist: any) => ({
                                 ...prevPlaylist,
                                 tracks: {
                                     ...prevPlaylist.tracks,
-                                    items: prevPlaylist.tracks.items.map(item =>
+                                    items: prevPlaylist.tracks.items.map((item: any) =>
                                         item.track.id === track.id
                                             ? { 
                                                 ...item, 
@@ -198,7 +190,7 @@ function SpotifyFreePanel({ search,setSearch,searchResults,setSearchResults,sele
                                 <p>{selectedPlaylist.name} ({selectedPlaylist?.tracks?.items?.length} Songs)</p>
                               </div>
                               <div className='playlistTracksDiv'>
-                                {selectedPlaylist ? selectedPlaylist?.tracks?.items?.map((track, idx) => (
+                                {selectedPlaylist ? selectedPlaylist?.tracks?.items?.map((track: any, idx: number) => (
                                   <div className='songDiv' key={track.track.id || idx}>
                                     <img src={track?.track?.album?.images?.[0]?.url || "/logo192.png"} alt={track.track.name}></img>
                                     <div className='trackMainInfo'>

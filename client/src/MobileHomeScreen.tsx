@@ -9,7 +9,7 @@ import DayNightWidget from './widgets/DayNightWidget';
 import SpotifyWidget from './widgets/SpotifyWidget';
 
 interface MobileHomeScreenProps {
-    accessToken: string
+    accessToken: string | null
     isMobile: boolean
     openModal: (page: string) => void
     currentSong: any

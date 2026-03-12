@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faBan, faLaptopCode } from '@fortawesome/free-solid-svg-icons';
-import { faGithub} from '@fortawesome/free-brands-svg-icons';
+import { faBan} from '@fortawesome/free-solid-svg-icons';
 import SelectedProjectPortfolioPanel from './SelectedProjectPortfolioPanel'
 import type {Project} from '../types'
 import '../App.css'
@@ -96,7 +95,7 @@ function SearchPortfolioPanel({ debouncedSearch, isMobile, selectedProject, setS
                 ): ""}
             </div>
     ):(
-        <SelectedProjectPortfolioPanel selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
+        <SelectedProjectPortfolioPanel selectedProject={selectedProject} setSelectedProject={setSelectedProject} isMobile={isMobile}/>
     )
     }
     </>
